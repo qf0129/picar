@@ -10,7 +10,7 @@ in4=37
 class Car(object):
 	def __init__(self):
 
-		self.gpio = GPIO
+		self.gpio = RPi.GPIO
 		self.gpio.setmode(self.gpio.BOARD)
 		self.gpio.setwarnings(False)
 		self.running = False
