@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/> 
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.video_div{
+			width: 100%;
+			text-align: center;
+		}
+		.video_div img{
+			width: 100%;
+			max-width: 800px;
+			min-width: 300px;
+			min-height: 300px;
+			background: #ccc;
+		}
+		.arrow_div{
+			width: 100%;
+			text-align: center;
+		}
+		.arrow_div_row div{
+			display: inline-block;
+			vertical-align: middle;
+			height: 70px;
+			width: 70px;
+			line-height: 70px;
+			font-size: 50px;
+			font-weight: 900;
+			background: #ccc;
+			border: 1px solid #fff;
+			color: #666;
+		}
+	</style>
+</head>
+<body>
+	<div class="video_div">
+		<!-- <img src="http://192.168.31.99:8000/stream.mjpg" > -->
+	</div>
+	<div class="arrow_div">
+		<div class="arrow_div_row">
+			<div class="arrow_btn" data-arrow='up'>↑</div>
+		</div>
+		<div class="arrow_div_row">
+			<div class="arrow_btn" data-arrow='left'>←</div>
+			<div class="arrow_btn" data-arrow='down'>↓</div>
+			<div class="arrow_btn" data-arrow='right'>→</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="/static/jquery.js"></script>
+	<script type="text/javascript">
+		$('.arrow_btn').on("touchstart",function(){
+			$.get("/car/control/"+$(this).attr('data-arrow'),
+			function(data){
+				if(data.code!=0){
+					_tip(data.msg);
+				}
+			}, "json");
+		});
+		$('.arrow_btn').on("touchmove touchend",function(){
+			$.get("/car/control/stop",
+			function(data){
+				if(data.code!=0){
+					_tip(data.msg);
+				}
+			}, "json");
+		});
+	</script>
+</body>
+</html>
