@@ -33,28 +33,28 @@ class Car(object):
 		self.gpio.output(in1, 1)
 		self.gpio.output(in2, 0)
 		self.gpio.output(in3, 0)
-		self.gpio.output(in4, 1)
+		self.gpio.output(in4, 0)
 		self.running = True
 		
 	def down(self):
 		print('>>down')
 		self.gpio.output(in1, 0)
 		self.gpio.output(in2, 1)
-		self.gpio.output(in3, 1)
+		self.gpio.output(in3, 0)
 		self.gpio.output(in4, 0)
 		self.running = True
 
 	def left(self):
 		print('>>left')
 		self.gpio.output(in1, 0)
-		self.gpio.output(in2, 1)
+		self.gpio.output(in2, 0)
 		self.gpio.output(in3, 0)
 		self.gpio.output(in4, 1)
 		self.running = True
 
 	def right(self):
 		print('>>right')
-		self.gpio.output(in1, 1)
+		self.gpio.output(in1, 0)
 		self.gpio.output(in2, 0)
 		self.gpio.output(in3, 1)
 		self.gpio.output(in4, 0)
