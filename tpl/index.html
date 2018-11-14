@@ -78,7 +78,8 @@
 			}
 		};
 
-		var ws = new WebSocket("ws://192.168.123.7:8000/websocket");
+		var host
+		var ws = new WebSocket("ws://" + window.location.host + "/websocket");
 
 
 		function touch_change(touch_list){
