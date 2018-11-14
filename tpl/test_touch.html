@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="/static/jquery.js"></script>
+</head>
+<body>
+<style type="text/css">
+.touch_btn {
+  width:50px;height:50px;background:#ddd;display: inline-block;margin: 5px;text-align: center;line-height: 50px;color: #ccc;
+}
+</style>
+<div>
+  <div class="touch_btn touch_btn_1">1</div>
+  <div class="touch_btn touch_btn_2">2</div>
+  <div class="touch_btn touch_btn_3">3</div>
+  <div class="touch_btn touch_btn_4">4</div>
+</div>
+<p class="tips"></p>
+<input class="msg_input" name="">
+<button class="send_msg_btn">Send</button>
+
+<script type="text/javascript">
+
+  $('.touch_btn').bind('touchstart', function (event) {
+      event.preventDefault();
+      console.log(event);
+      console.log(event.changedTouches);
+      $('.tips').html(event.changedTouches.length+' - '+event.targetTouches.length+' - '+event.touches.length)
+  });
+
+  var ws = new WebSocket("ws://localhost:8000/websocket");
+
+  $('.send_msg_btn').click(function(){
+      ws.send($('.msg_input').val());
+  });
+
+  // ws.onopen = function() {
+  //     ws.send("Hello, world");
+  // };
+  ws.onmessage = function (evt) {
+      // alert(evt.data);
+      console.log(evt.data);
+  };
+
+  function onTouchStart(e){
+      console.log(e);
+  }
+  function start(){
+      var dom = document.getElementById('dom');
+      dom.addEventListener('touchstart', onTouchStart, false);
+  }
+</script>
+</body>
+</html>

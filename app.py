@@ -1,5 +1,5 @@
 from bottle import get, run, template, static_file
-from car import Car
+from utils.car import Car
 
 car = Car()
 
