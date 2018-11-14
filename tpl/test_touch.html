@@ -12,25 +12,16 @@
 }
 </style>
 <div>
-  <div class="touch_btn touch_btn_1">1</div>
-  <div class="touch_btn touch_btn_2">2</div>
-  <div class="touch_btn touch_btn_3">3</div>
-  <div class="touch_btn touch_btn_4">4</div>
+  <div id="1" class="touch_btn">⬆</div>
+  <div id="2" class="touch_btn">⬇</div>
+  <div id="3" class="touch_btn">⬅</div>
+  <div id="4" class="touch_btn">➡</div>
 </div>
 <p class="tips"></p>
 <input class="msg_input" name="">
 <button class="send_msg_btn">Send</button>
 
 <script type="text/javascript">
-  Array.prototype.indexOf = function(val) {
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] == val) {
-          return i;
-        }
-      }
-    return -1;
-  };
-
   Array.prototype.remove = function(val) {
     var index = this.indexOf(val);
     if (index > -1) {
@@ -38,11 +29,11 @@
     }
   };
 
-  var ws = new WebSocket("ws://localhost:8000/websocket");
+  var ws = new WebSocket("ws://192.168.123.7:8000/websocket");
 
   function touch_change(touch_list){
       $('.tips').html(touch_list);
-      ws.send($('.msg_input').val());
+      ws.send(touch_list);
   }
 
   $('.touch_btn').bind('touchstart', touch_handler);
@@ -53,26 +44,13 @@
 
   function touch_handler(){
        var event = event || window.event;  
-
-        var oInp = document.getElementById("inp");  
-
-        switch(event.type){  
-            case "touchstart":  
-                event.preventDefault();
-                touch_list.push($(this).html());
-                console.log(event);
-                console.log(event.changedTouches);
-                touch_change(touch_list);
-                break;  
-            case "touchend":  
-                event.preventDefault();
-                touch_list.remove($(this).html());
-                touch_change(touch_list);
-                break;  
-            case "touchmove":  
-                event.preventDefault();  
-                break;  
-        }  
+       event.preventDefault();
+       if (event.type=="touchstart"){
+          touch_list.push($(this).attr('id'));
+       }else if(event.type=="touchend"){
+          touch_list.remove($(this).attr('id'));
+       }
+       touch_change(touch_list);
   }
 
 

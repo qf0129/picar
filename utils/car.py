@@ -14,10 +14,28 @@ class Car(object):
         self.gpio.setmode(self.gpio.BOARD)
         self.gpio.setwarnings(False)
         self.running = False
+        self._run()
 
-        for i in range(1, 5):
-            self.gpio.setup(eval('in'+str(i)), self.gpio.OUT)
-            self.gpio.output(eval('in'+str(i)), 0)
+        # for i in range(1, 5):
+        #     self.gpio.setup(eval('in'+str(i)), self.gpio.OUT)
+        #     self.gpio.output(eval('in'+str(i)), 0)
+
+    def run(self, up=0, down=0, left=0, right=0):
+        if up == None || down == None || left == None || right == None:
+            return
+        if up == 1 && down == 1:
+            up, down = 0, 0
+        if left == 1 && right == 1:
+            left, right = 0, 0
+
+        self._run(up, down, left, right)
+
+    def _run(self, up=0, down=0, left=0, right=0):
+        print('>>run', up, down, left, right)
+        self.gpio.output(in1, left)
+        self.gpio.output(in2, right)
+        self.gpio.output(in3, up)
+        self.gpio.output(in4, down)
 
     def stop(self):
         if self.running:

@@ -36,11 +36,11 @@ def handle_websocket():
 # def send_html(filename):
 #     return static_file(filename, root='./static', mimetype='text/html')
 
-# host = "0.0.0.0"
-# port = 8000
+host = "0.0.0.0"
+port = 8000
 
-# server = WSGIServer((host, port), app, handler_class=WebSocketHandler)
-# print("access @ http://%s:%s/websocket.html" % (host,port))
-# server.serve_forever()
+server = WSGIServer((host, port), app, handler_class=WebSocketHandler)
+print("access @ http://%s:%s/websocket.html" % (host,port))
+server.serve_forever()
 
-app.run(host='0.0.0.0', port=8000, reloader=True, server='gevent', handler_class=WebSocketHandler)
+# app.run(host='0.0.0.0', port=8000, reloader=True, server='gevent', handler_class=WebSocketHandler)
