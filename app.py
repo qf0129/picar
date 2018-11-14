@@ -25,8 +25,22 @@ def handle_websocket():
     while True:
         try:
             message = wsock.receive()
+            up, down, left, right = 0, 0, 0, 0
+
+            if '1' in message:
+                up = 1
+
+            if '2' in message:
+                down = 1
+
+            if '3' in message:
+                left = 1
+
+            if '4' in message:
+                right = 1
+
+            car.run(up, down, left, right)
             print('>>', message)
-            print(type(message))
             wsock.send("Server: %r" % message)
         except WebSocketError:
             break
