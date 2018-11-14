@@ -21,11 +21,11 @@ class Car(object):
         #     self.gpio.output(eval('in'+str(i)), 0)
 
     def run(self, up=0, down=0, left=0, right=0):
-        if up == None || down == None || left == None || right == None:
+        if up is None or down is None or left is None or right is None:
             return
-        if up == 1 && down == 1:
+        if up == 1 and down == 1:
             up, down = 0, 0
-        if left == 1 && right == 1:
+        if left == 1 and right == 1:
             left, right = 0, 0
 
         self._run(up, down, left, right)
