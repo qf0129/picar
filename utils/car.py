@@ -2,8 +2,8 @@ import time
 from os import system
 import RPi.GPIO
 
-in1=31
-in2=33
+in1=36
+in2=38
 in3=35
 in4=37
 
