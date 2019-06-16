@@ -2,81 +2,94 @@
 <html>
 <head>
 	<title></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/> 
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>  -->
 	<style type="text/css">
 		*{
 			padding: 0;
 			margin: 0;
 		}
 		.video_div{
+			position: fixed;
+			top: 0;
+			left: 0;
+			height: 100%;
 			width: 100%;
+			display: inline-block;
 			text-align: center;
 		}
 		.video_div img{
-			width: 100%;
-			max-width: 800px;
-			min-width: 300px;
-			min-height: 300px;
+			height: 100%;
+			min-width: 480px;
 			background: #ccc;
 		}
 		.btn_group{
-			position: fixed;
-			bottom: 1rem;
-			left: 0;
-			width: 100%;
 		}
 		.btn_group > div{
 			display: inline-block;
-			text-align: center;
-			vertical-align: bottom;
 		}
 		.btn_group_left{
-			width: 40%;
+			position: fixed;
+			bottom: 10px;
+			left: 10px;
+			width: 25%;
 		}
 		.btn_group_right{
-			padding-bottom: 30px;
-			width: 58%;
+			position: fixed;
+			bottom: 10px;
+			right: 10px;
+			width: 25%;
+			text-align: right;
 		}
 		.btn_group_right>div{
 			display: inline-block;
 		}
-		.way{
-			width: 4rem;
-			height: 4rem;
+		.way_btn{
+			text-align: center;
+			min-height: 3rem;
 			background: #999;
-			color: #fff;
-			font-size: 2rem;
-			margin: 10px auto;
-			line-height: 4rem;
+			color: #eee;
+			font-size: 4rem;
+			margin: 5px auto;
+			opacity: 0.6;
+		}
+		.way_btn_left{
+			width: 50%;
+		}
+		.way_btn_right{
+			width: 40%;
 		}
 	</style>
 </head>
 <body>
 	<div class="video_div">
-		<img >
+		<img />
 	</div>
 
 	<div class="btn_group">
 		<div class="btn_group_left">
-		  <div id="1" class="way">↑</div>
-		  <div id="2" class="way">↓</div>
+		  <div id="1" class="way_btn way_btn_left">↑</div>
+		  <div id="2" class="way_btn way_btn_left">↓</div>
 		</div>
 		<div class="btn_group_right">
-		  <div id="3" class="way">←</div>
-		  <div id="4" class="way">→</div>
+		  <div id="3" class="way_btn way_btn_right">←</div>
+		  <div id="4" class="way_btn way_btn_right">→</div>
 		</div>
 	</div>
 
 
 	<script type="text/javascript" src="/static/jquery.js"></script>
 	<script type="text/javascript">
-
+		$('.way_btn').height($('.way_btn').width());
+		$('.way_btn').css('line-height', $('.way_btn').height()+'px');
+		console.log($('.way_btn').width());
+		console.log($('.way_btn').height());
 		Array.prototype.remove = function(val) {
 			var index = this.indexOf(val);
 			if (index > -1) {
 				this.splice(index, 1);
 			}
 		};
+		console.log(window.location.hostname)
 
 		$('.video_div img').attr('src', 'http://' + window.location.hostname + ':8001/stream.mjpg')
 
@@ -87,9 +100,9 @@
 			$('.tips').html(touch_list);
 			ws.send(touch_list);
 		}
-		$('.way').bind('touchstart', touch_handler);
-		$('.way').bind('touchend', touch_handler);
-		$('.way').bind('touchmove', touch_handler);
+		$('.way_btn').bind('touchstart', touch_handler);
+		$('.way_btn').bind('touchend', touch_handler);
+		$('.way_btn').bind('touchmove', touch_handler);
 
 		var touch_list = new Array();
 

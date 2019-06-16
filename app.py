@@ -4,9 +4,10 @@ from gevent.pywsgi import WSGIServer
 # from geventwebsocket import WebSocketHandler, WebSocketError
 from geventwebsocket import WebSocketError 
 from geventwebsocket.handler import WebSocketHandler
-from utils.car import Car
+# from utils.car import Car
 
-car = Car()
+# car = Car()
+car = None
 app = Bottle()
 
 @app.get('/')
